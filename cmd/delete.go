@@ -12,11 +12,8 @@ import (
 var deleteCmd = &cli.Command{
 	Name:    "delete",
 	Aliases: []string{"del"},
-	Usage:   "delete key or keys, regex supported",
-	Flags: []cli.Flag{
-		directoryFlag,
-	},
-	Action: deleted,
+	Usage:   "delete key or keys, simple regex supported",
+	Action:  deleted,
 }
 
 func deleted(ctx *cli.Context) error {

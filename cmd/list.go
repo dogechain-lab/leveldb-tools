@@ -12,11 +12,8 @@ import (
 var listCmd = &cli.Command{
 	Name:    "list",
 	Aliases: []string{"ls"},
-	Usage:   "list out key or keys, regex supported",
-	Flags: []cli.Flag{
-		directoryFlag,
-	},
-	Action: list,
+	Usage:   "list out key or keys, simple regex supported",
+	Action:  list,
 }
 
 func list(ctx *cli.Context) error {

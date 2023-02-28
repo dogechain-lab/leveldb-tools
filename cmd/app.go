@@ -15,4 +15,7 @@ var App = &cli.App{
 		showCmd,
 		deleteCmd,
 	},
+	Flags: []cli.Flag{
+		directoryFlag,
+	},
 }

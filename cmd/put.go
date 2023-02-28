@@ -8,8 +8,7 @@ import (
 
 var putCmd = &cli.Command{
 	Name:  "put",
-	Usage: "put key value or [key value]s",
-	Flags: []cli.Flag{},
+	Usage: "put key:value or [key:value]s",
 	Action: func(cCtx *cli.Context) error {
 		fmt.Println("list task: ", cCtx.Args().First(), cCtx.Args().Get(2))
 		return nil

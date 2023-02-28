@@ -10,11 +10,8 @@ import (
 )
 
 var showCmd = &cli.Command{
-	Name:  "show",
-	Usage: "show key: value or [key: value]s, regex supported",
-	Flags: []cli.Flag{
-		directoryFlag,
-	},
+	Name:   "show",
+	Usage:  "show \"key: value\" or [key: value]s, simple regex supported",
 	Action: show,
 }
 
