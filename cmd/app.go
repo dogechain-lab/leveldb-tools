@@ -1,13 +1,10 @@
-package main
+package cmd
 
 import (
-	"log"
-	"os"
-
 	"github.com/urfave/cli/v2"
 )
 
-var app = &cli.App{
+var App = &cli.App{
 	Name:                   "ldb",
 	Usage:                  "CRUD leveldb files",
 	EnableBashCompletion:   true,
@@ -18,10 +15,4 @@ var app = &cli.App{
 		showCmd,
 		deleteCmd,
 	},
-}
-
-func main() {
-	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
-	}
 }
