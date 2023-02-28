@@ -125,3 +125,12 @@ func ParseKeys(ctx *cli.Context) (*Result, error) {
 
 	return res, nil
 }
+
+func String2Hex(s string) ([]byte, error) {
+	if strings.HasPrefix(s, "0x") {
+		str := strings.TrimPrefix(s, "0x")
+		return hex.DecodeString(str)
+	}
+
+	return []byte(s), nil
+}
