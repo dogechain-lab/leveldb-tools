@@ -9,11 +9,13 @@ var App = &cli.App{
 	Usage:                  "CRUD leveldb files",
 	EnableBashCompletion:   true,
 	UseShortOptionHandling: true,
+	HideVersion:            true, // we create a command for this
 	Commands: []*cli.Command{
 		putCmd,
 		listCmd,
 		showCmd,
 		deleteCmd,
+		versionCmd,
 	},
 	Flags: []cli.Flag{
 		directoryFlag,

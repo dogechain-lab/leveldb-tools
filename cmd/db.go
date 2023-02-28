@@ -21,7 +21,7 @@ func openDB(ctx *cli.Context, opts *opt.Options) (*leveldb.DB, error) {
 
 	db, err := leveldb.OpenFile(dbpath, opts)
 	if err != nil {
-		return nil, fmt.Errorf("open DB(%s) failed: %w", dbpath, err)
+		return nil, fmt.Errorf("open DB(%s) failed: %w, try -d with dir", dbpath, err)
 	}
 
 	return db, nil

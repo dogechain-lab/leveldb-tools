@@ -11,10 +11,10 @@ import (
 
 var (
 	directoryFlag = &cli.PathFlag{
-		Name:     "directory",
-		Aliases:  []string{"dir", "d"},
-		EnvVars:  []string{"LDB_DIRECTORY"},
-		Required: true,
+		Name:    "directory",
+		Aliases: []string{"dir", "d"},
+		EnvVars: []string{"LDB_DIRECTORY"},
+		// Required: true,
 	}
 )
 
