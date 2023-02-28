@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"encoding/hex"
 	"fmt"
 
 	"github.com/syndtr/goleveldb/leveldb/iterator"
@@ -32,10 +31,10 @@ func list(ctx *cli.Context) error {
 			return fmt.Errorf("key not exists")
 		}
 
-		fmt.Println(hex.EncodeToString(key))
+		fmt.Printf("%#x\n", key)
 		return nil
 	}, func(iter iterator.Iterator) error {
-		fmt.Println(hex.EncodeToString(iter.Key()))
+		fmt.Printf("%#x\n", iter.Key())
 		return nil
 	})
 }

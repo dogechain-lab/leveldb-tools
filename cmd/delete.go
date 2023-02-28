@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"encoding/hex"
 	"fmt"
 
 	"github.com/syndtr/goleveldb/leveldb/iterator"
@@ -24,12 +23,12 @@ func deleted(ctx *cli.Context) error {
 	defer db.Close()
 
 	return iterKeys(ctx, db, func(key []byte) error {
-		fmt.Printf("delete key(%s)\n", hex.EncodeToString(key))
+		fmt.Printf("delete key(%#x)\n", key)
 		return db.Delete(key, &opt.WriteOptions{
 			NoWriteMerge: true, // do not trigger write merge for only 1 key.
 		})
 	}, func(iter iterator.Iterator) error {
-		fmt.Printf("delete key(%s)\n", hex.EncodeToString(iter.Key()))
+		fmt.Printf("delete key(%#x)\n", iter.Key())
 		return db.Delete(iter.Key(), nil)
 	})
 }
