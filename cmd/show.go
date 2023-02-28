@@ -30,10 +30,10 @@ func show(ctx *cli.Context) error {
 			return fmt.Errorf("value is nil")
 		}
 
-		fmt.Printf("%#x: %#x\n", key, v)
+		fmt.Printf("%#x:%#x\n", key, v)
 		return nil
 	}, func(iter iterator.Iterator) error {
-		fmt.Printf("%#x: %#x\n", iter.Key(), iter.Value())
+		fmt.Printf("%#x:%#x\n", iter.Key(), iter.Value())
 		return nil
 	})
 }

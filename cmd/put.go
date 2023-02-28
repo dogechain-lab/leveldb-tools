@@ -45,7 +45,7 @@ func put(ctx *cli.Context) error {
 			return fmt.Errorf("value(%s) invalid: %w", v, err)
 		}
 
-		fmt.Printf("put %#x: %#x to database\n", key, value)
+		fmt.Printf("put %#x:%#x to database\n", key, value)
 
 		if err := db.Put(key, value, nil); err != nil {
 			return fmt.Errorf("put key(%s) value(%s) failed: %w", k, v, err)
