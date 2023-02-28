@@ -4,11 +4,8 @@ import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/dogechain-lab/leveldb-tools/internal/byteiter"
-	"github.com/dogechain-lab/leveldb-tools/internal/parser"
 	"github.com/syndtr/goleveldb/leveldb/iterator"
 	"github.com/syndtr/goleveldb/leveldb/opt"
-	"github.com/syndtr/goleveldb/leveldb/util"
 	"github.com/urfave/cli/v2"
 )
 
@@ -29,13 +26,8 @@ func list(ctx *cli.Context) error {
 	}
 	defer db.Close()
 
-	res, err := parser.ParseKeys(ctx)
-	if err != nil {
-		return err
-	}
-
-	if res.Type() == parser.ByteKey {
-		exists, err := db.Has(res.Key(), nil)
+	return iterKeys(ctx, db, func(key []byte) error {
+		exists, err := db.Has(key, nil)
 		if err != nil {
 			return fmt.Errorf("get key failed: %w", err)
 		}
@@ -43,44 +35,10 @@ func list(ctx *cli.Context) error {
 			return fmt.Errorf("key not exists")
 		}
 
-		fmt.Println(hex.EncodeToString(res.Key()))
+		fmt.Println(hex.EncodeToString(key))
 		return nil
-	}
-
-	var (
-		iter   iterator.Iterator
-		prefix []byte
-		keylen int
-	)
-
-	var byterange *util.Range
-	switch res.Type() {
-	case parser.ByteAll:
-		byterange = byteiter.BytesPrefixRange(prefix, nil)
-	case parser.BytePrefix:
-		keylen = res.KeyLen()
-		// from zero
-		byterange = byteiter.BytesPrefixRange(prefix, make([]byte, keylen))
-	}
-
-	iter = db.NewIterator(
-		byterange,
-		&opt.ReadOptions{
-			DontFillCache: true,
-		},
-	)
-
-	for iter.Next() {
-		k := iter.Key()
-		if res.ShouldSkip(k) {
-			// fmt.Fprintln(os.Stderr, "skip key:", hex.EncodeToString(k))
-			continue
-		}
-
-		fmt.Println(hex.EncodeToString(k))
-	}
-
-	iter.Release()
-
-	return iter.Error()
+	}, func(iter iterator.Iterator) error {
+		fmt.Println(hex.EncodeToString(iter.Key()))
+		return nil
+	})
 }
