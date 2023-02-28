@@ -8,8 +8,10 @@ import (
 )
 
 var app = &cli.App{
-	Name:  "ldb",
-	Usage: "read/write leveldb files",
+	Name:                   "ldb",
+	Usage:                  "CRUD leveldb files",
+	EnableBashCompletion:   true,
+	UseShortOptionHandling: true,
 	Commands: []*cli.Command{
 		putCmd,
 		listCmd,
