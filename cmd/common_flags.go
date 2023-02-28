@@ -10,8 +10,6 @@ import (
 )
 
 var (
-	currentDBFlag = "CURRENT_DB"
-
 	directoryFlag = &cli.PathFlag{
 		Name:     "directory",
 		Aliases:  []string{"dir", "d"},
