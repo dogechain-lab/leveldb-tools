@@ -24,3 +24,7 @@
 
 # binary
 bin/
+
+# test files
+*.txt
+*.log
